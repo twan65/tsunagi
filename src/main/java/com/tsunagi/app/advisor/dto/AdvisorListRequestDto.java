@@ -1,8 +1,13 @@
 package com.tsunagi.app.advisor.dto;
 
+import com.tsunagi.app.constant.expertise.Expertise;
+import com.tsunagi.app.constant.gender.Gender;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class AdvisorListRequestDto {
-    // TODO: アドバイザー一覧検索の条件項目を定義する。
+    private Expertise expertise;
+    private Gender gender;
 }

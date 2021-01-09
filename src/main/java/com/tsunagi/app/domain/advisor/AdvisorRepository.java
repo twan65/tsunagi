@@ -13,10 +13,12 @@ import java.util.List;
  */
 public interface AdvisorRepository extends JpaRepository<Advisor, Long> {
 
-    // TODO: 検索条件で検索をすること。パラメータ使用例は以下となる。
-    // @Query("select u from User u where u.firstname = :#{#customer.firstname}")
-    // List<User> findUsersByCustomersFirstname(@Param("customer") Customer customer);
-    @Query("SELECT a FROM advisor a")
+    /**
+     * 検索条件でアドバイザー一覧を取得する。
+     * @param requestDto　検索条件
+     * @return アドバイザー一覧
+     */
+    @Query("SELECT a FROM advisor a WHERE a.expertise = :#{#condition.expertise} AND a.gender = :#{#condition.gender}")
     List<Advisor> findAll(@Param("condition") AdvisorListRequestDto requestDto);
 
 }
