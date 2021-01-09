@@ -24,8 +24,8 @@ public class AdvisorController {
      * @return アドバイザー一覧
      */
     @GetMapping
-    public AdvisorListResponseDto findAllBy(@RequestBody AdvisorListRequestDto requestDto) {
-        return advisorService.findAllBy(requestDto);
+    public AdvisorListResponseDto findBy(@RequestBody AdvisorListRequestDto requestDto) {
+        return advisorService.findBy(requestDto);
     }
 
 }
