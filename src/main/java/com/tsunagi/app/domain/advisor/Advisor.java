@@ -5,6 +5,7 @@ import com.tsunagi.app.constant.expertise.Expertise;
 import com.tsunagi.app.constant.gender.GenderConverter;
 import com.tsunagi.app.domain.BaseTimeEntity;
 import com.tsunagi.app.domain.career.Career;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -50,4 +51,16 @@ public class Advisor extends BaseTimeEntity {
 //    private String profilePicturePath;
 
     // TODO: 今後、アドバイザー評価の項目を追加する。（テーブル作成方法について調べる必要あり）
+
+    @Builder
+    public Advisor(String mail, String name, long age, List<Career> careers, Gender gender, String introduce, Expertise expertise, long isDeleted) {
+        this.mail = mail;
+        this.name = name;
+        this.age = age;
+        this.careers = careers;
+        this.gender = gender;
+        this.introduce = introduce;
+        this.expertise = expertise;
+        this.isDeleted = isDeleted;
+    }
 }
