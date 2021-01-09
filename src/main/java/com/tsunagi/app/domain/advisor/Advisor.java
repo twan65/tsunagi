@@ -44,7 +44,7 @@ public class Advisor extends BaseTimeEntity {
     @Convert(converter = Expertise.class)
     private Expertise expertise;
 
-    private long isDeleted;
+    private boolean isDeleted;
 
     // TODO: 今後、プロフィル写真を追加したら画像パスを保存する。
 //    @Column(nullable = false)
@@ -53,7 +53,7 @@ public class Advisor extends BaseTimeEntity {
     // TODO: 今後、アドバイザー評価の項目を追加する。（テーブル作成方法について調べる必要あり）
 
     @Builder
-    public Advisor(String mail, String name, long age, List<Career> careers, Gender gender, String introduce, Expertise expertise, long isDeleted) {
+    public Advisor(String mail, String name, long age, List<Career> careers, Gender gender, String introduce, Expertise expertise, boolean isDeleted) {
         this.mail = mail;
         this.name = name;
         this.age = age;
