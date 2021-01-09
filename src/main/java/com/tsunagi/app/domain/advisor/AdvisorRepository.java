@@ -12,8 +12,9 @@ import java.util.List;
  */
 public interface AdvisorRepository extends JpaRepository<Advisor, Long> {
 
-    List<Advisor> findByExpertise(Expertise expertise);
-    List<Advisor> findByGender(Gender gender);
-    List<Advisor> findByExpertiseAndGender(Expertise expertise, Gender gender);
+    List<Advisor> findByIsDeletedFalse();
+    List<Advisor> findByExpertiseAndIsDeletedFalse(Expertise expertise);
+    List<Advisor> findByGenderAndIsDeletedFalse(Gender gender);
+    List<Advisor> findByExpertiseAndGenderIsDeletedFalse(Expertise expertise, Gender gender);
 
 }
