@@ -2,9 +2,7 @@ package com.tsunagi.app.constant.expertise;
 
 import com.tsunagi.app.constant.BaseEnumCode;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
 @AllArgsConstructor
 public enum Expertise implements BaseEnumCode<Integer> {
   WEB_DEVELOP(0),

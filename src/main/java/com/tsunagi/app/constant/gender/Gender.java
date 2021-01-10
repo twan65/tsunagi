@@ -2,9 +2,7 @@ package com.tsunagi.app.constant.gender;
 
 import com.tsunagi.app.constant.BaseEnumCode;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
 @AllArgsConstructor
 public enum Gender implements BaseEnumCode<Integer> {
   MAN(0),
