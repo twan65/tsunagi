@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum MessageCode {
-    SYSTEM_ERROR("E00001");
+    E00001("E00001"),
+    E00002("E00001");
 
     private final String code;
 

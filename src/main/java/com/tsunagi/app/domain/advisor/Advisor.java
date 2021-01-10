@@ -44,6 +44,7 @@ public class Advisor extends BaseTimeEntity {
     @Convert(converter = Expertise.class)
     private Expertise expertise;
 
+    @Column(name = "is_delete", nullable = false)
     private boolean isDeleted;
 
     // TODO: 今後、プロフィル写真を追加したら画像パスを保存する。

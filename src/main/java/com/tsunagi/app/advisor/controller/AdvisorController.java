@@ -1,10 +1,12 @@
 package com.tsunagi.app.advisor.controller;
 
+import com.tsunagi.app.advisor.dto.AdvisorDto;
 import com.tsunagi.app.advisor.dto.AdvisorListRequestDto;
 import com.tsunagi.app.advisor.dto.AdvisorListResponseDto;
 import com.tsunagi.app.advisor.service.AdvisorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +26,18 @@ public class AdvisorController {
      * @return アドバイザー一覧
      */
     @GetMapping
-    public AdvisorListResponseDto findBy(@RequestBody AdvisorListRequestDto requestDto) {
-        return advisorService.findBy(requestDto);
+    public AdvisorListResponseDto findAllBySearchCondition(@RequestBody AdvisorListRequestDto requestDto) {
+        return advisorService.findAllBySearchCondition(requestDto);
+    }
+
+    /**
+     * アドバイザーの詳細情報を取得する。
+     * @param advisorId
+     * @return アドバイザーの詳細情報
+     */
+    @GetMapping("/advisor/{id}")
+    public AdvisorDto findById(@PathVariable("id") Long advisorId) {
+        return advisorService.findById(advisorId);
     }
 
 }
