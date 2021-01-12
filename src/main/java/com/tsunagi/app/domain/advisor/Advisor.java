@@ -8,6 +8,7 @@ import com.tsunagi.app.domain.career.Career;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
+@Where(clause = "is_delete = false")
 public class Advisor extends BaseTimeEntity {
 
     @Id
@@ -63,5 +65,11 @@ public class Advisor extends BaseTimeEntity {
         this.introduce = introduce;
         this.expertise = expertise;
         this.isDeleted = isDeleted;
+    }
+
+    public void update(String name, String introduce, Expertise expertise) {
+        this.name = name;
+        this.introduce = introduce;
+        this.expertise = expertise;
     }
 }

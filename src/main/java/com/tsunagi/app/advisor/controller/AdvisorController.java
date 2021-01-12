@@ -3,12 +3,10 @@ package com.tsunagi.app.advisor.controller;
 import com.tsunagi.app.advisor.dto.AdvisorDto;
 import com.tsunagi.app.advisor.dto.AdvisorListRequestDto;
 import com.tsunagi.app.advisor.dto.AdvisorListResponseDto;
+import com.tsunagi.app.advisor.dto.AdvisorUpdateRequestDto;
 import com.tsunagi.app.advisor.service.AdvisorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * アドバイザー関連のAPIを定義する。
@@ -26,6 +24,7 @@ public class AdvisorController {
      * @return アドバイザー一覧
      */
     @GetMapping
+    @ResponseBody
     public AdvisorListResponseDto findAllBySearchCondition(@RequestBody AdvisorListRequestDto requestDto) {
         return advisorService.findAllBySearchCondition(requestDto);
     }
@@ -36,8 +35,21 @@ public class AdvisorController {
      * @return アドバイザーの詳細情報
      */
     @GetMapping("/advisor/{id}")
+    @ResponseBody
     public AdvisorDto findById(@PathVariable("id") Long advisorId) {
         return advisorService.findById(advisorId);
+    }
+
+    /**
+     * アドバイザー情報を更新する。
+     * @param advisorId アドバイザーID
+     * @param requestDto 更新内容
+     * @return
+     */
+    @PutMapping("/advisor/{id}")
+    @ResponseBody
+    public Long update(@PathVariable("id") Long advisorId, @RequestBody AdvisorUpdateRequestDto requestDto) {
+        return advisorService.update(advisorId, requestDto);
     }
 
 }

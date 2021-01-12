@@ -3,13 +3,13 @@ package com.tsunagi.app.advisor.service;
 import com.tsunagi.app.advisor.dto.AdvisorDto;
 import com.tsunagi.app.advisor.dto.AdvisorListRequestDto;
 import com.tsunagi.app.advisor.dto.AdvisorListResponseDto;
+import com.tsunagi.app.advisor.dto.AdvisorUpdateRequestDto;
 import com.tsunagi.app.domain.advisor.Advisor;
 import com.tsunagi.app.domain.advisor.AdvisorRepository;
 import com.tsunagi.common.constant.MessageCode;
 import com.tsunagi.common.exception.NoSearchResultException;
 import com.tsunagi.common.utils.*;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.bridge.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,14 +38,14 @@ public class AdvisorService {
     // TODO: ソートはどうするのか検討が必要、検討後に適用しよう。
     if (requestDto.getExpertise() != null && requestDto.getGender() != null) {
       advisors =
-          advisorRepository.findByExpertiseAndGenderIsDeletedFalse(
+          advisorRepository.findByExpertiseAndGender(
               requestDto.getExpertise(), requestDto.getGender());
     } else if (requestDto.getExpertise() != null) {
-      advisors = advisorRepository.findByExpertiseAndIsDeletedFalse(requestDto.getExpertise());
+      advisors = advisorRepository.findByExpertise(requestDto.getExpertise());
     } else if (requestDto.getGender() != null) {
-      advisors = advisorRepository.findByGenderAndIsDeletedFalse(requestDto.getGender());
+      advisors = advisorRepository.findByGender(requestDto.getGender());
     } else {
-      advisors = advisorRepository.findByIsDeletedFalse();
+      advisors = advisorRepository.findAll();
     }
 
     // EntityリストからDtoリストに変換する。
@@ -68,9 +68,29 @@ public class AdvisorService {
     Advisor advisor =
         advisorRepository
             .findById(advisorId)
-            .orElseThrow(
-                () -> new NoSearchResultException(MessageCode.E00002));
+            .orElseThrow(() -> new NoSearchResultException(MessageCode.E00002));
 
     return new AdvisorDto(advisor);
+  }
+
+  /**
+   * アドバイザー情報を更新する。
+   *
+   * @param advisorId アドバイザーID
+   * @param requestDto 更新内容
+   * @return
+   */
+  @Transactional
+  public Long update(Long advisorId, AdvisorUpdateRequestDto requestDto) {
+
+    Advisor advisor =
+        advisorRepository
+            .findById(advisorId)
+            .orElseThrow(() -> new NoSearchResultException(MessageCode.E00002));
+
+    // 特にSQLを投げなくてもJPAの永続性コンテキストのため、Updateされる。（Dirty checking）
+    advisor.update(requestDto.getName(), requestDto.getIntroduce(), requestDto.getExpertise());
+
+    return advisorId;
   }
 }
